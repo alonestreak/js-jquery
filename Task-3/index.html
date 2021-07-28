@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   <title>JQuery Assignment</title>
+   <style>
+        #load{
+                height: 50px;
+                width: 150px;
+            }
+        #load:hover{
+                background: rgb(19, 126, 60);
+          }
+          .infoPallete{
+            background:rgb(5, 5, 5);
+            animation: up 1s ease-in 0s 1;
+            overflow: hidden;
+            margin: 2px;
+            padding: 1px;
+            border: 2px groove black;
+          }
+          .infoPallete:hover {
+            background-color: blue;
+            
+            }
+            @keyframes up {
+            0%{
+                height: 0px;
+            }
+            100%{
+                height: 80px;
+            }
+        }
+          .infoPallete .title{
+            color:rgb(250, 252, 251);
+            font-size: 30px;
+            margin: 0px;
+            padding: 10px;
+          }
+          .infoPallete .body{
+            color:rgb(247, 248, 247);
+            margin: 0px;
+            margin-bottom: 20px;
+          }
+   </style>
+</head>
+ 
+<body>
+   <div class="comments" style="border: 1px solid green;padding:1rem;margin-bottom: 0.5rem;">
+   </div>
+   <button id="load">Load Data</button>
+
+
+
+   <script>     //JQ LOGIC GOES HERE
+   window.onload = function() {
+    $("#load").on("click",function(){ 
+        $.ajax({ 
+            type:"GET", 
+            url:"https://jsonplaceholder.typicode.com/posts", 
+            success:function(data){ 
+                let i=0;
+               data.forEach(element => {
+                   setTimeout(()=>{
+                    $(".comments").append(`<div class="infoPallete">
+                    <h3 class="title">${element.title}</h3>
+                    <p class="body">${element.body}</p>
+                    </div>`);
+                   },300*i);
+                i=i+1;
+               });
+            },
+            cache: false
+        }); 
+    });
+}
+
+   </script>
+</body>
+ </html>
